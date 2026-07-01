@@ -240,7 +240,11 @@ async function loadCheckins(){
     return;
   }
   try{
-    const res = await fetch(WEB_APP_URL, { method: "GET" });
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "list" })
+    });
     checkins = await res.json();
   }catch(e){
     showToast("Couldn't reach the sheet — check your connection");
